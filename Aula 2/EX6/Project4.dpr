@@ -1,4 +1,4 @@
-program Exercicio_6;
+program Project5;
 
 {$APPTYPE CONSOLE}
 
@@ -6,9 +6,8 @@ program Exercicio_6;
 
 uses
   System.SysUtils;
-
 Var
- x, y: Integer;
+x, y: Integer;
 
 begin
 
@@ -19,14 +18,13 @@ begin
   Writeln('Y = ');
   Readln (y);
 
-  Writeln(Format('O valor da adição: %d + %d = %d', [x,y,x + y]));
-  Writeln(Format('O valor da adição: %d - %d = %d', [x,y,x - y]));
-  Writeln(Format('O valor da adição: %d * %d = %d', [x,y,x * y]));
-  Writeln(Format('O valor da adição: %d / %d = %d', [x,y,x / y]));
+  Writeln(Format('O valor da %d + %d = %d', [x,y,x + y]));
+  Writeln(Format('O valor da %d - %d = %d', [x,y,x - y]));
+  Writeln(Format('O valor da %d * %d = %d', [x,y,x * y]));
+  Writeln(Format('O valor da %d / %d = %f', [x,y,x / y]));
   Readln;
 
   except
 
   end;
-
-end
+end.
