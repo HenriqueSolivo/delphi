@@ -1,0 +1,30 @@
+program Exercício11;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils;
+
+var
+opcao: string;
+
+begin
+  try
+  Writeln('Escreva o estado em sigla, Ex: SC');
+  Readln(opcao);
+
+  case (opcao) of
+
+  'AC': Writeln('Acre - Rio Branco (AC)');
+
+  end;
+
+
+    { TODO -oUser -cConsole Main : Insert code here }
+  except
+    on E: Exception do
+      Writeln(E.ClassName, ': ', E.Message);
+  end;
+end.

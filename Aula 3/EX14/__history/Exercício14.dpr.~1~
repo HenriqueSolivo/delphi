@@ -1,0 +1,68 @@
+program Exercício14;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils;
+
+Sys.collection;
+
+  type
+  Tproduto = record
+    codigo: integer;
+    valor: Double;
+    descricao: string;
+  end;
+
+
+  var
+  opcao,codigo: integer;
+  descricao: string;
+  valor: double;
+
+
+begin
+  try
+
+  Writeln('1-Cadastrar um novo produto');
+  Writeln('2-Listar produtos cadastrados');
+  Writeln('3-Pesquisar produto pelo código');
+  Writeln('4-Excluir um produto');
+  Writeln('5-Sair do sistema');
+
+    Writeln('Qual opção você deseja executar');
+      readln(opcao);
+
+case (opcao) of
+
+1:begin
+Writeln('Digite o código do produto');
+readln(codigo);
+Writeln('Digite a descrição do produto');
+readln(descricao);
+Writeln('Digite o valor do produto');
+readln(valor);
+end;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    { TODO -oUser -cConsole Main : Insert code here }
+  except
+    on E: Exception do
+      Writeln(E.ClassName, ': ', E.Message);
+  end;
+end.
