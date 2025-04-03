@@ -1,0 +1,100 @@
+unit TRABALHO;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls, Vcl.ComCtrls,
+  Vcl.Mask;
+
+type
+  TForm1 = class(TForm)
+    Tabela: TStringGrid;
+    CADASTRO: TLabel;
+    Aniversario: TDateTimePicker;
+    Telefone: TMaskEdit;
+    Nome: TEdit;
+    Email: TEdit;
+    Tipo: TComboBox;
+    Button1: TButton;
+    senha: TEdit;
+    confirmaSenha: TEdit;
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+   Fcodigo, FLinha: integer;
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+Uses
+  DateUtils;
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  if Trim(Nome.Text) = '' then
+  begin
+    ShowMessage('Nome é obrigatorio');
+    Nome.SetFocus;
+    exit
+  end;
+
+ YearOF(now);
+ YearOf(Aniversario.DateTime);
+
+   if YearOF(now) - YearOf(Aniversario.DateTime) < 16 then
+   begin
+   ShowMessage('Muito Jovem');
+   Aniversario.SetFocus;
+   exit
+   end;
+
+   if Trim(Telefone.Text).Length < 11 then
+   begin
+   ShowMessage('Telefone invalido');
+   Telefone.SetFocus;
+   exit
+   end;
+
+   if Trim(senha.Text).IsEmpty or
+   Trim(confirmaSenha.Text).IsEmpty or
+   (Trim(senha.Text) <> Trim(confirmaSenha.Text))
+    then
+    begin
+    ShowMessage('Snha errada');
+    exit
+    end;
+
+  Inc(Fcodigo);
+  Inc(FLinha);
+
+  Tabela.Cells[0, FLinha] := Fcodigo.ToString;
+  Tabela.Cells[1, FLinha] := Nome.ToString;
+  Tabela.Cells[2, FLinha] := Tipo.Items.Strings[Tipo.ItemIndex];
+  Tabela.Cells[3, FLinha] := DateToStr(Aniversario.Date);
+  Tabela.Cells[4, FLinha] := Telefone.EditText;
+  Tabela.Cells[1, FLinha] := Email.Text;
+
+
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+
+begin
+ Tabela.Cells[0,0] := 'ID';
+ Tabela.Cells[1,0] := 'Tipo';
+ Tabela.Cells[2,0] := 'Nome';
+ Tabela.Cells[3,0] := 'Email';
+ Tabela.Cells[4,0] := 'Aniversario';
+ Tabela.Cells[5,0] := 'Telefone';
+ Fcodigo := 0;
+end;
+
+end.
