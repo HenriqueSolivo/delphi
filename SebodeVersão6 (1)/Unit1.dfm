@@ -1,0 +1,734 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Sebo de Moises'
+  ClientHeight = 749
+  ClientWidth = 1193
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  OnCreate = FormCreate
+  TextHeight = 15
+  object Label3: TLabel
+    Left = 40
+    Top = 117
+    Width = 43
+    Height = 15
+    Caption = 'Assunto'
+  end
+  object Label4: TLabel
+    Left = 40
+    Top = 146
+    Width = 30
+    Height = 15
+    Caption = 'Autor'
+  end
+  object Label5: TLabel
+    Left = 40
+    Top = 175
+    Width = 41
+    Height = 15
+    Caption = 'Paginas'
+  end
+  object Label6: TLabel
+    Left = 40
+    Top = 204
+    Width = 30
+    Height = 15
+    Caption = 'Preco'
+  end
+  object V1: TLabel
+    Left = 136
+    Top = 280
+    Width = 489
+    Height = 15
+    Caption = 
+      '1. O cliente de camiseta amarela est'#225' em algum lugar '#224' esquerda ' +
+      'do cliente de camiseta azul.'
+  end
+  object V2: TLabel
+    Left = 136
+    Top = 301
+    Width = 843
+    Height = 15
+    Caption = 
+      '2. Quem escolheu o livro de 150 p'#225'ginas est'#225' em algum lugar entr' +
+      'e quem escolheu um livro de economia e quem escolheu um livro de' +
+      ' fotografia, nessa ordem.'
+  end
+  object V3: TLabel
+    Left = 136
+    Top = 322
+    Width = 377
+    Height = 15
+    Caption = 
+      '3. Na segunda posi'#231#227'o est'#225' o cliente que vai comprar um livro de' +
+      ' R$ 30.'
+  end
+  object V4: TLabel
+    Left = 136
+    Top = 343
+    Width = 396
+    Height = 15
+    Caption = 
+      '4. Roberto est'#225' exatamente '#224' esquerda de quem escolheu um livro ' +
+      'de artes.'
+  end
+  object V5: TLabel
+    Left = 136
+    Top = 364
+    Width = 436
+    Height = 15
+    Caption = 
+      '5. Na terceira posi'#231#227'o est'#225' o homem que vai comprar um livro do ' +
+      'autor portugu'#234's.'
+  end
+  object V6: TLabel
+    Left = 136
+    Top = 385
+    Width = 493
+    Height = 15
+    Caption = 
+      '6. O livro mais caro est'#225' sendo comprado pelo cliente que est'#225' e' +
+      'xatamente '#224' direita de Sim'#227'o.'
+  end
+  object V7: TLabel
+    Left = 136
+    Top = 406
+    Width = 596
+    Height = 15
+    Caption = 
+      '7. Quem est'#225' comprando o livro do autor angolano est'#225' ao lado de' +
+      ' quem est'#225' comprando o livro de 200 p'#225'ginas.'
+  end
+  object V8: TLabel
+    Left = 136
+    Top = 427
+    Width = 525
+    Height = 15
+    Caption = 
+      '8. O homem de camiseta branca est'#225' exatamente '#224' direita do homem' +
+      ' que escolheu o livro de R$ 40.'
+  end
+  object V9: TLabel
+    Left = 136
+    Top = 448
+    Width = 404
+    Height = 15
+    Caption = 
+      '9. O livro de fotografia est'#225' sendo comprado pelo cliente da ter' +
+      'ceira posi'#231#227'o.'
+  end
+  object V10: TLabel
+    Left = 136
+    Top = 469
+    Width = 661
+    Height = 15
+    Caption = 
+      '10. O cliente que est'#225' comprando o livro de R$ 40 est'#225' exatament' +
+      'e '#224' esquerda do cliente que est'#225' comprando o livro de R$ 50.'
+  end
+  object V11: TLabel
+    Left = 136
+    Top = 490
+    Width = 572
+    Height = 15
+    Caption = 
+      '11. O homem que escolheu o livro com menos p'#225'ginas est'#225' ao lado ' +
+      'do homem que escolheu uma biografia.'
+  end
+  object V12: TLabel
+    Left = 136
+    Top = 511
+    Width = 831
+    Height = 15
+    Caption = 
+      '12. O cliente de vermelho est'#225' em algum lugar entre o cliente qu' +
+      'e escolheu o livro mais barato e o cliente que escolheu o livro ' +
+      'do autor japon'#234's, nessa ordem.'
+  end
+  object V14: TLabel
+    Left = 136
+    Top = 553
+    Width = 277
+    Height = 15
+    Caption = '14. Claudinei est'#225' comprando o livro de 100 p'#225'ginas.'
+  end
+  object V13: TLabel
+    Left = 136
+    Top = 532
+    Width = 602
+    Height = 15
+    Caption = 
+      '13. Quem est'#225' comprando o livro de poesia est'#225' exatamente '#224' esqu' +
+      'erda de quem est'#225' comprando o livro de R$ 60.'
+  end
+  object V15: TLabel
+    Left = 136
+    Top = 574
+    Width = 591
+    Height = 15
+    Caption = 
+      '15. O homem que escolheu o livro do autor portugu'#234's est'#225' '#224' esque' +
+      'rda do homem que escolheu o livro de R$ 40.'
+  end
+  object Label1: TLabel
+    Left = 40
+    Top = 88
+    Width = 33
+    Height = 15
+    Caption = 'Nome'
+  end
+  object Label2: TLabel
+    Left = 40
+    Top = 59
+    Width = 39
+    Height = 15
+    Caption = 'Camisa'
+  end
+  object V16: TLabel
+    Left = 136
+    Top = 595
+    Width = 654
+    Height = 15
+    Caption = 
+      '16. O livro de 200 p'#225'ginas foi escolhido pelo cliente que est'#225' e' +
+      'xatamente '#224' esquerda do cliente que escolheu o livro de R$ 40.'
+  end
+  object V18: TLabel
+    Left = 136
+    Top = 637
+    Width = 548
+    Height = 15
+    Caption = 
+      '18. Quem est'#225' comprando o livro de R$ 30 est'#225' ao lado de quem es' +
+      't'#225' comprando o livro de 250 p'#225'ginas.'
+  end
+  object V17: TLabel
+    Left = 136
+    Top = 616
+    Width = 335
+    Height = 15
+    Caption = '17. Claudinei est'#225' comprando um livro cujo autor '#233' da Oceania.'
+  end
+  object V19: TLabel
+    Left = 136
+    Top = 658
+    Width = 390
+    Height = 15
+    Caption = 
+      '19. Um das pontas est'#225' o homem que escolheu um livro do autor as' +
+      'i'#225'tico.'
+  end
+  object V20: TLabel
+    Left = 136
+    Top = 679
+    Width = 609
+    Height = 15
+    Caption = 
+      '20. O homem de camiseta vermelha est'#225' em algum lugar entre o Gil' +
+      ' e o homem de camiseta amarela, nessa ordem.'
+  end
+  object V21: TLabel
+    Left = 136
+    Top = 700
+    Width = 522
+    Height = 15
+    Caption = 
+      '21. Agnaldo est'#225' exatamente '#224' direita do cliente que est'#225' compra' +
+      'ndo um livro do autor australiano.'
+  end
+  object GroupBox1: TGroupBox
+    Left = 136
+    Top = 32
+    Width = 177
+    Height = 225
+    Caption = 'Cliente 1'
+    Color = clBtnFace
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 0
+    StyleName = 'Windows'
+    object CamisaCliente1: TComboBox
+      Left = 16
+      Top = 24
+      Width = 145
+      Height = 23
+      TabOrder = 0
+      Items.Strings = (
+        'verde'
+        'vermelha'
+        'amarela'
+        'azul'
+        'branca'
+        '')
+    end
+    object NomeCliente1: TComboBox
+      Left = 16
+      Top = 53
+      Width = 145
+      Height = 23
+      TabOrder = 1
+      Items.Strings = (
+        'Gil'
+        'Sim'#227'o'
+        'Roberto'
+        'Claudinei'
+        'Agnaldo'
+        '')
+    end
+    object AssuntoCliente1: TComboBox
+      Left = 16
+      Top = 82
+      Width = 145
+      Height = 23
+      TabOrder = 2
+      Items.Strings = (
+        'economia'
+        'poesia'
+        'fotografia'
+        'artes'
+        'biografia'
+        '')
+    end
+    object AutorCliente1: TComboBox
+      Left = 16
+      Top = 111
+      Width = 145
+      Height = 23
+      TabOrder = 3
+      Items.Strings = (
+        'brasileiro'
+        'angolano'
+        'portugu'#234's'
+        'australiano'
+        'japon'#234's'
+        '')
+    end
+    object PrecoCliente1: TComboBox
+      Left = 16
+      Top = 169
+      Width = 145
+      Height = 23
+      TabOrder = 4
+      Items.Strings = (
+        'R$ 20'
+        'R$ 30'
+        'R$ 40'
+        'R$ 50'
+        'R$ 60'
+        '')
+    end
+    object PaginasCliente1: TComboBox
+      Left = 16
+      Top = 140
+      Width = 145
+      Height = 23
+      TabOrder = 5
+      Items.Strings = (
+        '100'
+        '150'
+        '200'
+        '250'
+        '300'
+        '')
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 319
+    Top = 32
+    Width = 177
+    Height = 225
+    Caption = 'Cliente 2'
+    Color = clBtnFace
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 1
+    StyleName = 'Windows'
+    object CamisaCliente2: TComboBox
+      Left = 16
+      Top = 24
+      Width = 145
+      Height = 23
+      TabOrder = 0
+      Items.Strings = (
+        'verde'
+        'vermelha'
+        'amarela'
+        'azul'
+        'branca'
+        '')
+    end
+    object NomeCliente2: TComboBox
+      Left = 16
+      Top = 53
+      Width = 145
+      Height = 23
+      TabOrder = 1
+      Items.Strings = (
+        'Gil'
+        'Sim'#227'o'
+        'Roberto'
+        'Claudinei'
+        'Agnaldo'
+        '')
+    end
+    object AssuntoCliente2: TComboBox
+      Left = 16
+      Top = 82
+      Width = 145
+      Height = 23
+      TabOrder = 2
+      Items.Strings = (
+        'economia'
+        'poesia'
+        'fotografia'
+        'artes'
+        'biografia'
+        '')
+    end
+    object AutorCliente2: TComboBox
+      Left = 16
+      Top = 111
+      Width = 145
+      Height = 23
+      TabOrder = 3
+      Items.Strings = (
+        'brasileiro'
+        'angolano'
+        'portugu'#234's'
+        'australiano'
+        'japon'#234's'
+        '')
+    end
+    object PrecoCliente2: TComboBox
+      Left = 16
+      Top = 169
+      Width = 145
+      Height = 23
+      TabOrder = 4
+      Items.Strings = (
+        'R$ 20'
+        'R$ 30'
+        'R$ 40'
+        'R$ 50'
+        'R$ 60'
+        '')
+    end
+    object PaginasCliente2: TComboBox
+      Left = 16
+      Top = 140
+      Width = 145
+      Height = 23
+      TabOrder = 5
+      Items.Strings = (
+        '100'
+        '150'
+        '200'
+        '250'
+        '300'
+        '')
+    end
+  end
+  object GroupBox3: TGroupBox
+    Left = 502
+    Top = 32
+    Width = 177
+    Height = 225
+    Caption = 'Cliente 3'
+    Color = clBtnFace
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 2
+    StyleName = 'Windows'
+    object CamisaCliente3: TComboBox
+      Left = 16
+      Top = 24
+      Width = 145
+      Height = 23
+      TabOrder = 0
+      StyleName = 'Windows'
+      Items.Strings = (
+        'verde'
+        'vermelha'
+        'amarela'
+        'azul'
+        'branca'
+        '')
+    end
+    object NomeCliente3: TComboBox
+      Left = 16
+      Top = 53
+      Width = 145
+      Height = 23
+      TabOrder = 1
+      Items.Strings = (
+        'Gil'
+        'Sim'#227'o'
+        'Roberto'
+        'Claudinei'
+        'Agnaldo'
+        '')
+    end
+    object AssuntoCliente3: TComboBox
+      Left = 16
+      Top = 82
+      Width = 145
+      Height = 23
+      TabOrder = 2
+      Items.Strings = (
+        'economia'
+        'poesia'
+        'fotografia'
+        'artes'
+        'biografia'
+        '')
+    end
+    object AutorCliente3: TComboBox
+      Left = 16
+      Top = 111
+      Width = 145
+      Height = 23
+      TabOrder = 3
+      Items.Strings = (
+        'brasileiro'
+        'angolano'
+        'portugu'#234's'
+        'australiano'
+        'japon'#234's'
+        '')
+    end
+    object PrecoCliente3: TComboBox
+      Left = 16
+      Top = 169
+      Width = 145
+      Height = 23
+      TabOrder = 4
+      Items.Strings = (
+        'R$ 20'
+        'R$ 30'
+        'R$ 40'
+        'R$ 50'
+        'R$ 60'
+        '')
+    end
+    object PaginasCliente3: TComboBox
+      Left = 16
+      Top = 140
+      Width = 145
+      Height = 23
+      TabOrder = 5
+      Items.Strings = (
+        '100'
+        '150'
+        '200'
+        '250'
+        '300'
+        '')
+    end
+  end
+  object GroupBox4: TGroupBox
+    Left = 685
+    Top = 32
+    Width = 177
+    Height = 225
+    Caption = 'Cliente 4'
+    Color = clBtnFace
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 3
+    StyleName = 'Windows'
+    object CamisaCliente4: TComboBox
+      Left = 16
+      Top = 24
+      Width = 145
+      Height = 23
+      TabOrder = 0
+      Items.Strings = (
+        'verde'
+        'vermelha'
+        'amarela'
+        'azul'
+        'branca'
+        '')
+    end
+    object NomeCliente4: TComboBox
+      Left = 16
+      Top = 53
+      Width = 145
+      Height = 23
+      TabOrder = 1
+      Items.Strings = (
+        'Gil'
+        'Sim'#227'o'
+        'Roberto'
+        'Claudinei'
+        'Agnaldo'
+        '')
+    end
+    object AssuntoCliente4: TComboBox
+      Left = 16
+      Top = 82
+      Width = 145
+      Height = 23
+      TabOrder = 2
+      Items.Strings = (
+        'economia'
+        'poesia'
+        'fotografia'
+        'artes'
+        'biografia'
+        '')
+    end
+    object AutorCliente4: TComboBox
+      Left = 16
+      Top = 111
+      Width = 145
+      Height = 23
+      TabOrder = 3
+      Items.Strings = (
+        'brasileiro'
+        'angolano'
+        'portugu'#234's'
+        'australiano'
+        'japon'#234's'
+        '')
+    end
+    object PrecoCliente4: TComboBox
+      Left = 16
+      Top = 169
+      Width = 145
+      Height = 23
+      TabOrder = 4
+      Items.Strings = (
+        'R$ 20'
+        'R$ 30'
+        'R$ 40'
+        'R$ 50'
+        'R$ 60'
+        '')
+    end
+    object PaginasCliente4: TComboBox
+      Left = 16
+      Top = 140
+      Width = 145
+      Height = 23
+      TabOrder = 5
+      Items.Strings = (
+        '100'
+        '150'
+        '200'
+        '250'
+        '300'
+        '')
+    end
+  end
+  object GroupBox5: TGroupBox
+    Left = 868
+    Top = 32
+    Width = 177
+    Height = 225
+    Caption = 'Cliente 5'
+    Color = clBtnFace
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 4
+    StyleName = 'Windows'
+    object CamisaCliente5: TComboBox
+      Left = 16
+      Top = 24
+      Width = 145
+      Height = 23
+      TabOrder = 0
+      Items.Strings = (
+        'verde'
+        'vermelha'
+        'amarela'
+        'azul'
+        'branca'
+        '')
+    end
+    object NomeCliente5: TComboBox
+      Left = 16
+      Top = 53
+      Width = 145
+      Height = 23
+      TabOrder = 1
+      Items.Strings = (
+        'Gil'
+        'Sim'#227'o'
+        'Roberto'
+        'Claudinei'
+        'Agnaldo'
+        '')
+    end
+    object AssuntoCliente5: TComboBox
+      Left = 16
+      Top = 82
+      Width = 145
+      Height = 23
+      TabOrder = 2
+      Items.Strings = (
+        'economia'
+        'poesia'
+        'fotografia'
+        'artes'
+        'biografia'
+        '')
+    end
+    object AutorCliente5: TComboBox
+      Left = 16
+      Top = 111
+      Width = 145
+      Height = 23
+      TabOrder = 3
+      Items.Strings = (
+        'brasileiro'
+        'angolano'
+        'portugu'#234's'
+        'australiano'
+        'japon'#234's'
+        '')
+    end
+    object PrecoCliente5: TComboBox
+      Left = 16
+      Top = 169
+      Width = 145
+      Height = 23
+      TabOrder = 4
+      Items.Strings = (
+        'R$ 20'
+        'R$ 30'
+        'R$ 40'
+        'R$ 50'
+        'R$ 60'
+        '')
+    end
+    object PaginasCliente5: TComboBox
+      Left = 16
+      Top = 140
+      Width = 145
+      Height = 23
+      TabOrder = 5
+      Items.Strings = (
+        '100'
+        '150'
+        '200'
+        '250'
+        '300'
+        '')
+    end
+  end
+  object btnReset: TButton
+    Left = 1064
+    Top = 113
+    Width = 75
+    Height = 25
+    Caption = 'Reset'
+    TabOrder = 5
+    OnClick = btnResetClick
+  end
+end

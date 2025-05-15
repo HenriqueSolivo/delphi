@@ -1,0 +1,1183 @@
+﻿unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TCliente = record
+    Camisa, Nome, Assunto, Autor: string;
+    Paginas, Preco: Integer;
+  end;
+
+  TForm1 = class(TForm)
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    V1: TLabel;
+    V2: TLabel;
+    V3: TLabel;
+    V4: TLabel;
+    V5: TLabel;
+    V6: TLabel;
+    V7: TLabel;
+    V8: TLabel;
+    V9: TLabel;
+    V10: TLabel;
+    V11: TLabel;
+    V12: TLabel;
+    V14: TLabel;
+    V13: TLabel;
+    V15: TLabel;
+    GroupBox1: TGroupBox;
+    CamisaCliente1: TComboBox;
+    NomeCliente1: TComboBox;
+    AssuntoCliente1: TComboBox;
+    AutorCliente1: TComboBox;
+    PrecoCliente1: TComboBox;
+    PaginasCliente1: TComboBox;
+    GroupBox2: TGroupBox;
+    CamisaCliente2: TComboBox;
+    NomeCliente2: TComboBox;
+    AssuntoCliente2: TComboBox;
+    AutorCliente2: TComboBox;
+    PrecoCliente2: TComboBox;
+    PaginasCliente2: TComboBox;
+    GroupBox3: TGroupBox;
+    CamisaCliente3: TComboBox;
+    NomeCliente3: TComboBox;
+    AssuntoCliente3: TComboBox;
+    AutorCliente3: TComboBox;
+    PrecoCliente3: TComboBox;
+    PaginasCliente3: TComboBox;
+    GroupBox4: TGroupBox;
+    CamisaCliente4: TComboBox;
+    NomeCliente4: TComboBox;
+    AssuntoCliente4: TComboBox;
+    AutorCliente4: TComboBox;
+    PrecoCliente4: TComboBox;
+    PaginasCliente4: TComboBox;
+    GroupBox5: TGroupBox;
+    CamisaCliente5: TComboBox;
+    NomeCliente5: TComboBox;
+    AssuntoCliente5: TComboBox;
+    AutorCliente5: TComboBox;
+    PrecoCliente5: TComboBox;
+    PaginasCliente5: TComboBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    btnReset: TButton;
+    V16: TLabel;
+    V18: TLabel;
+    V17: TLabel;
+    V19: TLabel;
+    V20: TLabel;
+    V21: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure CamisaCliente1Change(Sender: TObject);
+    procedure CamisaCliente2Change(Sender: TObject);
+    procedure CamisaCliente5Change(Sender: TObject);
+    procedure CamisaCliente4Change(Sender: TObject);
+    procedure CamisaCliente3Change(Sender: TObject);
+    procedure btnResetClick(Sender: TObject);
+
+  private
+    procedure AtualizarDicas;
+    procedure QualquerComboChange(Sender: TObject);
+    procedure ResetarCampos;
+    procedure VerificarDica12(const Clientes: array of TCliente; var LabelDica: TLabel);
+    procedure VerificarDica18(const Clientes: array of TCliente; var LabelDica: TLabel);
+  public
+
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+var
+  AllCombos: array[1..30] of TComboBox;
+  i: Integer;
+begin
+
+  AllCombos[1] := CamisaCliente1;  AllCombos[2] := NomeCliente1;  AllCombos[3] := AssuntoCliente1;
+  AllCombos[4] := AutorCliente1;   AllCombos[5] := PaginasCliente1; AllCombos[6] := PrecoCliente1;
+  AllCombos[7] := CamisaCliente2;  AllCombos[8] := NomeCliente2;  AllCombos[9] := AssuntoCliente2;
+  AllCombos[10] := AutorCliente2;  AllCombos[11] := PaginasCliente2; AllCombos[12] := PrecoCliente2;
+  AllCombos[13] := CamisaCliente3; AllCombos[14] := NomeCliente3; AllCombos[15] := AssuntoCliente3;
+  AllCombos[16] := AutorCliente3;  AllCombos[17] := PaginasCliente3; AllCombos[18] := PrecoCliente3;
+  AllCombos[19] := CamisaCliente4; AllCombos[20] := NomeCliente4; AllCombos[21] := AssuntoCliente4;
+  AllCombos[22] := AutorCliente4;  AllCombos[23] := PaginasCliente4; AllCombos[24] := PrecoCliente4;
+  AllCombos[25] := CamisaCliente5; AllCombos[26] := NomeCliente5; AllCombos[27] := AssuntoCliente5;
+  AllCombos[28] := AutorCliente5;  AllCombos[29] := PaginasCliente5; AllCombos[30] := PrecoCliente5;
+
+  for i := 1 to 30 do
+    AllCombos[i].OnChange := QualquerComboChange;
+
+CamisaCliente1.OnChange := CamisaCliente1Change;
+CamisaCliente2.OnChange := CamisaCliente2Change;
+CamisaCliente3.OnChange := CamisaCliente3Change;
+CamisaCliente4.OnChange := CamisaCliente4Change;
+CamisaCliente5.OnChange := CamisaCliente5Change;
+
+end;
+
+
+procedure TForm1.btnResetClick(Sender: TObject);
+begin
+ResetarCampos;
+end;
+
+procedure TForm1.CamisaCliente1Change(Sender: TObject);
+begin
+  if Sender = CamisaCliente1 then
+  begin
+    GroupBox1.ParentColor := False;
+    case CamisaCliente1.ItemIndex of
+      0: GroupBox1.Color := clGreen;
+      1: GroupBox1.Color := clRed;
+      2: GroupBox1.Color := clYellow;
+      3: GroupBox1.Color := clBlue;
+      4: GroupBox1.Color := clWhite;
+    else
+      GroupBox1.Color := clBtnFace;
+    end;
+     AtualizarDicas;
+  end;
+ end;
+
+procedure TForm1.CamisaCliente2Change(Sender: TObject);
+begin
+  GroupBox2.ParentColor := False;
+  case CamisaCliente2.ItemIndex of
+    0: GroupBox2.Color := clGreen;
+    1: GroupBox2.Color := clRed;
+    2: GroupBox2.Color := clYellow;
+    3: GroupBox2.Color := clBlue;
+    4: GroupBox2.Color := clWhite;
+  else
+    GroupBox2.Color := clBtnFace;
+  end;
+  AtualizarDicas;
+end;
+
+procedure TForm1.CamisaCliente3Change(Sender: TObject);
+begin
+  GroupBox3.ParentColor := False;
+  case CamisaCliente3.ItemIndex of
+    0: GroupBox3.Color := clGreen;
+    1: GroupBox3.Color := clRed;
+    2: GroupBox3.Color := clYellow;
+    3: GroupBox3.Color := clBlue;
+    4: GroupBox3.Color := clWhite;
+  else
+    GroupBox3.Color := clBtnFace;
+  end;
+  AtualizarDicas;
+end;
+
+procedure TForm1.CamisaCliente4Change(Sender: TObject);
+begin
+  GroupBox4.ParentColor := False;
+  case CamisaCliente4.ItemIndex of
+    0: GroupBox4.Color := clGreen;
+    1: GroupBox4.Color := clRed;
+    2: GroupBox4.Color := clYellow;
+    3: GroupBox4.Color := clBlue;
+    4: GroupBox4.Color := clWhite;
+  else
+    GroupBox4.Color := clBtnFace;
+  end;
+  AtualizarDicas;
+end;
+
+procedure TForm1.CamisaCliente5Change(Sender: TObject);
+begin
+  GroupBox5.ParentColor := False;
+  case CamisaCliente5.ItemIndex of
+    0: GroupBox5.Color := clGreen;
+    1: GroupBox5.Color := clRed;
+    2: GroupBox5.Color := clYellow;
+    3: GroupBox5.Color := clBlue;
+    4: GroupBox5.Color := clWhite;
+  else
+    GroupBox5.Color := clBtnFace;
+  end;
+  AtualizarDicas;
+end;
+
+procedure TForm1.AtualizarDicas;
+var
+  Clientes: array[1..5] of TCliente;
+  Labels: array[1..21] of TLabel;
+  i7, pos100, pos250, posBrasileiro: Integer;
+  menorPag, posMenor, i11: Integer;
+  posVermelho, posGil, posJapones: Integer;
+  todasCorretas: Boolean;
+  posEco, posFoto, pos150: Integer;
+  posAmarela: Integer;
+
+  function GetPreco(Texto: string): Integer;
+  begin
+    Result := StrToIntDef(StringReplace(Texto, 'R$ ', '', []), 0);
+  end;
+
+  function GetPaginas(Texto: string): Integer;
+  begin
+    Result := StrToIntDef(Texto, 0);
+  end;
+
+  function PosCamisa(Cor: string): Integer;
+  var i: Integer;
+  begin
+    for i := 1 to 5 do if Clientes[i].Camisa = Cor then Exit(i);
+    Result := 0;
+  end;
+
+  function PosAssunto(Assunto: string): Integer;
+  var i: Integer;
+  begin
+    for i := 1 to 5 do if Clientes[i].Assunto = Assunto then Exit(i);
+    Result := 0;
+  end;
+
+  function PosNome(Nome: string): Integer;
+  var i: Integer;
+  begin
+    for i := 1 to 5 do if Clientes[i].Nome = Nome then Exit(i);
+    Result := 0;
+  end;
+
+begin
+  Labels[1] := V1;  Labels[2] := V2;  Labels[3] := V3;  Labels[4] := V4;  Labels[5] := V5;
+  Labels[6] := V6;  Labels[7] := V7;  Labels[8] := V8;  Labels[9] := V9;  Labels[10] := V10;
+  Labels[11] := V11;  Labels[12] := V12;  Labels[13] := V13;  Labels[14] := V14;  Labels[15] := V15;
+  Labels[16] := V16;  Labels[17] := V17;  Labels[18] := V18;  Labels[19] := V19;  Labels[20] := V20;
+  Labels[21] := V21;
+
+  Clientes[1].Camisa := CamisaCliente1.Text;
+  Clientes[1].Nome := NomeCliente1.Text;
+  Clientes[1].Assunto := AssuntoCliente1.Text;
+  Clientes[1].Autor := AutorCliente1.Text;
+  Clientes[1].Paginas := GetPaginas(PaginasCliente1.Text);
+  Clientes[1].Preco := GetPreco(PrecoCliente1.Text);
+
+  Clientes[2].Camisa := CamisaCliente2.Text;
+  Clientes[2].Nome := NomeCliente2.Text;
+  Clientes[2].Assunto := AssuntoCliente2.Text;
+  Clientes[2].Autor := AutorCliente2.Text;
+  Clientes[2].Paginas := GetPaginas(PaginasCliente2.Text);
+  Clientes[2].Preco := GetPreco(PrecoCliente2.Text);
+
+  Clientes[3].Camisa := CamisaCliente3.Text;
+  Clientes[3].Nome := NomeCliente3.Text;
+  Clientes[3].Assunto := AssuntoCliente3.Text;
+  Clientes[3].Autor := AutorCliente3.Text;
+  Clientes[3].Paginas := GetPaginas(PaginasCliente3.Text);
+  Clientes[3].Preco := GetPreco(PrecoCliente3.Text);
+
+  Clientes[4].Camisa := CamisaCliente4.Text;
+  Clientes[4].Nome := NomeCliente4.Text;
+  Clientes[4].Assunto := AssuntoCliente4.Text;
+  Clientes[4].Autor := AutorCliente4.Text;
+  Clientes[4].Paginas := GetPaginas(PaginasCliente4.Text);
+  Clientes[4].Preco := GetPreco(PrecoCliente4.Text);
+
+  Clientes[5].Camisa := CamisaCliente5.Text;
+  Clientes[5].Nome := NomeCliente5.Text;
+  Clientes[5].Assunto := AssuntoCliente5.Text;
+  Clientes[5].Autor := AutorCliente5.Text;
+  Clientes[5].Paginas := GetPaginas(PaginasCliente5.Text);
+  Clientes[5].Preco := GetPreco(PrecoCliente5.Text);
+
+  // Dica 1
+  if (PosCamisa('amarela') > 0) and (PosCamisa('azul') > 0) then
+  begin
+    if PosCamisa('amarela') < PosCamisa('azul') then
+      V1.Font.Color := clGreen
+    else
+      V1.Font.Color := clRed;
+  end
+  else
+    V1.Font.Color := clBlack;
+
+// Dica 2 – 150 está entre economia e fotografia, nessa ordem
+V2.Font.Color := clBlack;
+
+posEco := PosAssunto('economia');
+posFoto := PosAssunto('fotografia');
+pos150 := 0;
+
+// Achar posição do livro de 150 páginas
+for i7 := 1 to 5 do
+  if Clientes[i7].Paginas = 150 then
+  begin
+    pos150 := i7;
+    Break;
+  end;
+
+// Verificação antecipada: se 150 está na mesma posição que economia ou fotografia, está errado
+if ((pos150 > 0) and (pos150 = posEco)) or ((pos150 > 0) and (pos150 = posFoto)) then
+begin
+  V2.Font.Color := clRed;
+  Exit;
+end;
+
+// Verifica se economia e fotografia foram preenchidos
+if (posEco > 0) and (posFoto > 0) then
+begin
+  // Verificação 1: fotografia não pode vir antes da economia
+  if posFoto < posEco then
+    V2.Font.Color := clRed
+
+  // Verificação 2: estão lado a lado (não há espaço para o livro de 150 entre eles)
+  else if Abs(posFoto - posEco) = 1 then
+    V2.Font.Color := clRed
+
+  // Verificação 3: 150 está corretamente entre economia e fotografia
+  else if (pos150 > 0) and (posEco < pos150) and (pos150 < posFoto) then
+    V2.Font.Color := clGreen
+
+  // 150 está fora da ordem esperada
+  else if pos150 > 0 then
+    V2.Font.Color := clRed;
+end;
+
+
+
+// Dica 3 – Na segunda posição está o cliente que vai comprar um livro de R$ 30
+V3.Font.Color := clBlack;
+var pos30_Dica3: Integer;
+begin
+  pos30_Dica3 := 0;
+
+  // Verifica se o valor 30 foi usado em alguma posição
+  for i7 := 1 to 5 do
+    if Clientes[i7].Preco = 30 then
+    begin
+      pos30_Dica3 := i7;
+      Break;
+    end;
+
+  // Novo: se a posição 2 tiver um valor diferente de 30 → erro
+  if (Clientes[2].Preco > 0) and (Clientes[2].Preco <> 30) then
+    V3.Font.Color := clRed
+  else if pos30_Dica3 = 2 then
+    V3.Font.Color := clGreen
+  else if (pos30_Dica3 > 0) then
+    V3.Font.Color := clRed
+  else
+    V3.Font.Color := clBlack;
+end;
+
+
+// Dica 4 – Roberto está exatamente à esquerda de quem escolheu um livro de artes.
+V4.Font.Color := clBlack;
+
+var
+  posRoberto, posArtes4: Integer;
+begin
+  posRoberto := PosNome('Roberto');
+  posArtes4 := 0;
+
+  // Encontrar a posição do assunto "artes"
+  for i7 := 1 to 5 do
+    if Clientes[i7].Assunto = 'artes' then
+    begin
+      posArtes4 := i7;
+      Break;
+    end;
+
+  // Caso ideal: ambos preenchidos
+  if (posRoberto > 0) and (posArtes4 > 0) then
+  begin
+    if posRoberto = posArtes4 - 1 then
+      V4.Font.Color := clGreen
+    else
+      V4.Font.Color := clRed;
+  end
+  // Apenas Roberto foi preenchido
+  else if (posRoberto > 0) and (posRoberto < 5) then
+  begin
+    if (Clientes[posRoberto + 1].Assunto <> '') and (Clientes[posRoberto + 1].Assunto <> 'artes') then
+      V4.Font.Color := clRed;
+  end
+  // Apenas artes foi preenchido
+  else if (posArtes4 > 1) then
+  begin
+    if (Clientes[posArtes4 - 1].Nome <> '') and (Clientes[posArtes4 - 1].Nome <> 'Roberto') then
+      V4.Font.Color := clRed;
+  end;
+end;
+
+
+// Dica 5 - Na terceira posição está o homem que vai comprar um livro do autor português
+V5.Font.Color := clBlack;
+
+if Clientes[3].Autor <> '' then
+begin
+  if Clientes[3].Autor = 'português' then
+    V5.Font.Color := clGreen
+  else
+    V5.Font.Color := clRed;
+end
+else
+begin
+  // Se a posição 3 estiver vazia, ainda assim precisamos verificar se "português" está em outro lugar
+  for i7 := 1 to 5 do
+    if (i7 <> 3) and (Clientes[i7].Autor = 'português') then
+    begin
+      V5.Font.Color := clRed;
+      Break;
+    end;
+end;
+
+
+
+// Dica 6 – O livro mais caro está sendo comprado pelo cliente que está exatamente à direita de Simão.
+V6.Font.Color := clBlack;
+
+var posSimao, pos60: Integer;
+begin
+  posSimao := PosNome('Simão');
+  pos60 := 0;
+
+  // Encontrar a posição do livro de R$ 60
+  for i7 := 1 to 5 do
+    if Clientes[i7].Preco = 60 then
+      pos60 := i7;
+
+  if posSimao > 0 then
+  begin
+    if (posSimao < 5) then
+    begin
+      if Clientes[posSimao + 1].Preco = 60 then
+        V6.Font.Color := clGreen
+      else if (Clientes[posSimao + 1].Preco <> 0) then
+        V6.Font.Color := clRed
+      else if (pos60 > 0) and (pos60 <> posSimao + 1) then
+        V6.Font.Color := clRed
+      else
+        V6.Font.Color := clBlack;
+    end
+    else if (pos60 > 0) then
+      V6.Font.Color := clRed;
+  end
+  else
+    V6.Font.Color := clBlack;  // Simão não foi posicionado ainda → neutra
+end;
+
+// Dica 7 – Quem está comprando o livro do autor angolano está ao lado de quem está comprando o livro de 200 páginas.
+V7.Font.Color := clBlack;
+var
+  posAngolano, pos200: Integer;
+begin
+  posAngolano := 0;
+  pos200 := 0;
+
+  for i7 := 1 to 5 do
+  begin
+    if Clientes[i7].Autor = 'angolano' then
+      posAngolano := i7;
+    if Clientes[i7].Paginas = 200 then
+      pos200 := i7;
+  end;
+
+  // Ambos foram posicionados
+  if (posAngolano > 0) and (pos200 > 0) then
+  begin
+    if Abs(posAngolano - pos200) = 1 then
+      V7.Font.Color := clGreen
+    else
+      V7.Font.Color := clRed;
+  end
+
+  // Se só o autor foi preenchido e os dois vizinhos não são 200
+  else if (posAngolano > 0) then
+  begin
+    if ((posAngolano > 1) and (Clientes[posAngolano - 1].Paginas <> 0) and (Clientes[posAngolano - 1].Paginas <> 200)) and
+       ((posAngolano < 5) and (Clientes[posAngolano + 1].Paginas <> 0) and (Clientes[posAngolano + 1].Paginas <> 200)) then
+      V7.Font.Color := clRed
+    else
+      V7.Font.Color := clBlack;
+  end
+
+  // Se só o livro de 200 foi preenchido e os dois vizinhos não são angolano
+  else if (pos200 > 0) then
+  begin
+    if ((pos200 > 1) and (Clientes[pos200 - 1].Autor <> '') and (Clientes[pos200 - 1].Autor <> 'angolano')) and
+       ((pos200 < 5) and (Clientes[pos200 + 1].Autor <> '') and (Clientes[pos200 + 1].Autor <> 'angolano')) then
+      V7.Font.Color := clRed
+    else
+      V7.Font.Color := clBlack;
+  end;
+end;
+
+
+// Dica 8 – O homem de camisa branca está exatamente à direita de quem comprou o livro de R$ 40.
+V8.Font.Color := clBlack;
+
+var
+  posBranca, pos40_1: Integer;
+begin
+  posBranca := 0;
+  pos40_1 := 0;
+
+  for i7 := 1 to 5 do
+  begin
+    if Clientes[i7].Camisa = 'branca' then
+      posBranca := i7;
+    if Clientes[i7].Preco = 40 then
+      pos40_1 := i7;
+  end;
+
+  if (posBranca > 0) and (pos40_1 > 0) then
+  begin
+    if posBranca = pos40_1 + 1 then
+      V8.Font.Color := clGreen
+    else
+      V8.Font.Color := clRed;
+  end
+  else if (pos40_1 > 0) and (pos40_1 < 5) then
+  begin
+    if (Clientes[pos40_1 + 1].Camisa <> '') and (Clientes[pos40_1 + 1].Camisa <> 'branca') then
+      V8.Font.Color := clRed;
+  end
+  else if (posBranca > 1) then
+  begin
+    if (Clientes[posBranca - 1].Preco <> 0) and (Clientes[posBranca - 1].Preco <> 40) then
+      V8.Font.Color := clRed;
+  end;
+end;
+
+
+
+// Dica 9 – O livro de fotografia está sendo comprado pelo cliente da terceira posição.
+V9.Font.Color := clBlack;
+
+var posFotografia: Integer;
+begin
+  posFotografia := 0;
+
+  // Verifica em qual posição está o assunto "fotografia"
+  for i7 := 1 to 5 do
+  begin
+    if Clientes[i7].Assunto = 'fotografia' then
+    begin
+      posFotografia := i7;
+      Break;
+    end;
+  end;
+
+  if posFotografia = 3 then
+    V9.Font.Color := clGreen
+  else if posFotografia > 0 then
+    V9.Font.Color := clRed
+  else
+    V9.Font.Color := clBlack;
+end;
+
+// Dica 10 – O cliente que está comprando o livro de R$ 40 está exatamente à esquerda do cliente que está comprando o livro de R$ 50.
+V10.Font.Color := clBlack;
+
+var
+  pos40, pos50: Integer;
+
+begin
+  pos40 := 0;
+  pos50 := 0;
+
+  // Identifica as posições dos valores R$ 40 e R$ 50
+  for i7 := 1 to 5 do
+  begin
+    if Clientes[i7].Preco = 40 then
+      pos40 := i7;
+    if Clientes[i7].Preco = 50 then
+      pos50 := i7;
+  end;
+
+  // Se ambos foram encontrados
+  if (pos40 > 0) and (pos50 > 0) then
+  begin
+    if pos50 = pos40 + 1 then
+      V10.Font.Color := clGreen
+    else
+      V10.Font.Color := clRed;
+  end
+  // Se apenas um deles foi preenchido, valida se o outro lado é inválido
+  else if (pos40 > 0) then
+  begin
+    if (pos40 < 5) and (Clientes[pos40 + 1].Preco <> 0) and (Clientes[pos40 + 1].Preco <> 50) then
+      V10.Font.Color := clRed;
+  end
+  else if (pos50 > 1) then
+  begin
+    if (Clientes[pos50 - 1].Preco <> 0) and (Clientes[pos50 - 1].Preco <> 40) then
+      V10.Font.Color := clRed;
+  end;
+end;
+
+// Dica 11 – O homem que escolheu o livro com menos páginas está ao lado do homem que escolheu uma biografia.
+V11.Font.Color := clBlack;
+
+menorPag := MaxInt;
+posMenor := 0;
+var totalPagPreenchidas := 0;
+
+// Dica 11 – O homem que escolheu o livro com menos páginas está ao lado do homem que escolheu uma biografia.
+V11.Font.Color := clBlack;
+
+var
+  posMenor_1, posBio: Integer;
+begin
+  posMenor_1 := 0;
+  posBio := 0;
+
+  // Encontra posição do livro de 100 páginas (menor)
+  for i7 := 1 to 5 do
+    if Clientes[i7].Paginas = 100 then
+      posMenor_1 := i7;
+
+  // Encontra posição do assunto biografia
+  for i7 := 1 to 5 do
+    if Clientes[i7].Assunto = 'biografia' then
+      posBio := i7;
+
+  if (posMenor_1 > 0) and (posBio > 0) then
+  begin
+    if Abs(posMenor_1 - posBio) = 1 then
+      V11.Font.Color := clGreen
+    else
+      V11.Font.Color := clRed;
+  end
+  else if (posMenor_1 > 0) then
+  begin
+    // Verifica os vizinhos do livro de 100 páginas
+    if (posMenor_1 > 1) and (Clientes[posMenor_1 - 1].Assunto <> '') and (Clientes[posMenor_1 - 1].Assunto <> 'biografia') and
+       (posMenor_1 < 5) and (Clientes[posMenor_1 + 1].Assunto <> '') and (Clientes[posMenor_1 + 1].Assunto <> 'biografia') then
+      V11.Font.Color := clRed
+    else
+      V11.Font.Color := clBlack;
+  end
+  else if (posBio > 0) then
+  begin
+    // Verifica os vizinhos de quem tem assunto biografia
+    if (posBio > 1) and (Clientes[posBio - 1].Paginas <> 0) and (Clientes[posBio - 1].Paginas <> 100) and
+       (posBio < 5) and (Clientes[posBio + 1].Paginas <> 0) and (Clientes[posBio + 1].Paginas <> 100) then
+      V11.Font.Color := clRed
+    else
+      V11.Font.Color := clBlack;
+  end;
+end;
+
+
+VerificarDica12(Clientes, V12);
+
+// Dica 13 – Quem está comprando o livro de poesia está exatamente à esquerda de quem está comprando o livro de R$ 60
+V13.Font.Color := clBlack;
+
+var
+  posPoesia, pos60_d13: Integer;
+begin
+  posPoesia := 0;
+  pos60_d13 := 0;
+
+  // Identificar posições
+  for i7 := 1 to 5 do
+  begin
+    if Clientes[i7].Assunto = 'poesia' then
+      posPoesia := i7;
+    if Clientes[i7].Preco = 60 then
+      pos60_d13 := i7;
+  end;
+
+  // Ambos definidos
+  if (posPoesia > 0) and (pos60_d13 > 0) then
+  begin
+    if posPoesia = pos60_d13 - 1 then
+      V13.Font.Color := clGreen
+    else
+      V13.Font.Color := clRed;
+  end
+  // Se só poesia estiver definida, já podemos checar se à direita existe algo errado
+  else if (posPoesia > 0) and (posPoesia < 5) then
+  begin
+    if (Clientes[posPoesia + 1].Preco <> 0) and (Clientes[posPoesia + 1].Preco <> 60) then
+      V13.Font.Color := clRed;
+  end
+  // Se só o preço 60 estiver definido, checar se à esquerda tem algo errado
+  else if (pos60_d13 > 1) then
+  begin
+    if (Clientes[pos60_d13 - 1].Assunto <> '') and (Clientes[pos60_d13 - 1].Assunto <> 'poesia') then
+      V13.Font.Color := clRed;
+  end;
+end;
+
+
+// Dica 14 – Claudinei está comprando o livro de 100 páginas
+V14.Font.Color := clBlack;
+
+var
+  posClaudinei14, pos100pg14: Integer;
+begin
+  posClaudinei14 := PosNome('Claudinei');
+  pos100pg14 := 0;
+
+  // Localiza a posição do livro de 100 páginas
+  for i7 := 1 to 5 do
+    if Clientes[i7].Paginas = 100 then
+    begin
+      pos100pg14 := i7;
+      Break;
+    end;
+
+  // Caso ideal: ambos estão na mesma posição
+  if (posClaudinei14 > 0) and (posClaudinei14 = pos100pg14) then
+  begin
+    V14.Font.Color := clGreen;
+  end
+  // Claudinei foi posicionado, mas está com páginas diferentes de 100
+  else if (posClaudinei14 > 0) and (Clientes[posClaudinei14].Paginas <> 0) and (Clientes[posClaudinei14].Paginas <> 100) then
+  begin
+    V14.Font.Color := clRed;
+  end
+  // Livro de 100 páginas foi posicionado, mas o nome não é Claudinei
+  else if (pos100pg14 > 0) and (Clientes[pos100pg14].Nome <> '') and (Clientes[pos100pg14].Nome <> 'Claudinei') then
+  begin
+    V14.Font.Color := clRed;
+  end
+  // Ambos foram usados, mas em posições diferentes
+  else if (posClaudinei14 > 0) and (pos100pg14 > 0) and (posClaudinei14 <> pos100pg14) then
+  begin
+    V14.Font.Color := clRed;
+  end
+  else
+    V14.Font.Color := clBlack;
+end;
+
+
+// Dica 15 – O homem que escolheu o livro do autor português está à esquerda do homem que escolheu o livro de R$ 40.
+V15.Font.Color := clBlack;
+
+var
+  posPortugues, pos40_2: Integer;
+
+begin
+  posPortugues := 0;
+  pos40_2 := 0;
+
+  // Descobre a posição de cada um
+  for i7 := 1 to 5 do
+  begin
+    if Clientes[i7].Autor = 'português' then
+      posPortugues := i7;
+    if Clientes[i7].Preco = 40 then
+      pos40_2 := i7;
+  end;
+
+  if (posPortugues > 0) and (pos40_2 > 0) then
+  begin
+    if pos40_2 = posPortugues + 1 then
+      V15.Font.Color := clGreen
+    else
+      V15.Font.Color := clRed;
+  end
+  else if (posPortugues > 0) then
+  begin
+    if (posPortugues < 5) and (Clientes[posPortugues + 1].Preco <> 0) and (Clientes[posPortugues + 1].Preco <> 40) then
+      V15.Font.Color := clRed;
+  end
+  else if (pos40_2 > 1) then
+  begin
+    if (Clientes[pos40_2 - 1].Autor <> '') and (Clientes[pos40_2 - 1].Autor <> 'português') then
+      V15.Font.Color := clRed;
+  end;
+end;
+
+
+// Dica 16 – O livro de 200 páginas está à esquerda de quem comprou o de R$ 40
+V16.Font.Color := clBlack;
+var
+  pos200_d16, pos40_d16: Integer;
+begin
+  pos200_d16 := 0;
+  pos40_d16 := 0;
+
+  // Encontrar as posições
+  for i7 := 1 to 5 do
+  begin
+    if Clientes[i7].Paginas = 200 then
+      pos200_d16 := i7;
+    if Clientes[i7].Preco = 40 then
+      pos40_d16 := i7;
+  end;
+
+  if (pos200_d16 > 0) and (pos40_d16 > 0) then
+  begin
+    if pos200_d16 = pos40_d16 - 1 then
+      V16.Font.Color := clGreen
+    else
+      V16.Font.Color := clRed;
+  end
+  else if (pos200_d16 > 0) then
+  begin
+    // Verifica o valor ao lado direito
+    if (pos200_d16 < 5) and (Clientes[pos200_d16 + 1].Preco <> 0) and (Clientes[pos200_d16 + 1].Preco <> 40) then
+      V16.Font.Color := clRed;
+  end
+  else if (pos40_d16 > 1) then
+  begin
+    // Verifica o valor ao lado esquerdo
+    if (Clientes[pos40_d16 - 1].Paginas <> 0) and (Clientes[pos40_d16 - 1].Paginas <> 200) then
+      V16.Font.Color := clRed;
+  end;
+end;
+
+
+// Dica 17 – Claudinei está comprando um livro cujo autor é da Oceania.
+V17.Font.Color := clBlack;
+
+var
+  posClaudinei, posAustraliano2, i: Integer;
+begin
+  posClaudinei := PosNome('Claudinei');
+  posAustraliano2 := 0;
+
+  // Encontrar a posição do autor australiano
+  for i := 1 to 5 do
+  begin
+    if Clientes[i].Autor = 'australiano' then
+    begin
+      posAustraliano2 := i;
+
+      // Verificação adicional: se o nome nesta posição for diferente de Claudinei → erro
+      if (Clientes[i].Nome <> '') and (Clientes[i].Nome <> 'Claudinei') then
+      begin
+        V17.Font.Color := clRed;
+        Exit;
+      end;
+    end;
+  end;
+
+  // Se Claudinei estiver posicionado
+  if posClaudinei > 0 then
+  begin
+    // Se ele está com o autor australiano → certo
+    if Clientes[posClaudinei].Autor = 'australiano' then
+      V17.Font.Color := clGreen
+    // Se ele preencheu outro autor → errado
+    else if Clientes[posClaudinei].Autor <> '' then
+      V17.Font.Color := clRed
+    else
+      V17.Font.Color := clBlack;
+
+    // Se algum outro cliente pegou o australiano → erro
+    if (posAustraliano2 > 0) and (posAustraliano2 <> posClaudinei) then
+      V17.Font.Color := clRed;
+  end
+  else
+    V17.Font.Color := clBlack;  // Claudinei ainda não foi posicionado
+end;
+
+
+
+VerificarDica18(Clientes, V18);
+
+
+// Dica 19 – Um dos cantos está o homem que escolheu um livro do autor asiático (japonês).
+V19.Font.Color := clBlack;
+
+var posJapones2: Integer;
+begin
+  posJapones2 := 0;
+
+  // Verifica onde está o autor japonês
+  for i7 := 1 to 5 do
+    if Clientes[i7].Autor = 'japonês' then
+    begin
+      posJapones2 := i7;
+      Break;
+    end;
+
+  if posJapones2 = 1 then
+    V19.Font.Color := clGreen
+  else if posJapones2 = 5 then
+    V19.Font.Color := clGreen
+  else if posJapones2 > 0 then
+    V19.Font.Color := clRed
+  else
+    V19.Font.Color := clBlack;
+end;
+
+
+
+// Dica 20 – O cliente de vermelho está em algum lugar entre o Gil e o cliente de camiseta amarela, nessa ordem.
+begin
+  posGil := PosNome('Gil');
+  posVermelho := PosCamisa('vermelha');
+  posAmarela := PosCamisa('amarela');
+
+  if (posGil > 0) and (posVermelho > 0) and (posAmarela > 0) then
+  begin
+    if (posGil < posVermelho) and (posVermelho < posAmarela) then
+      V20.Font.Color := clGreen
+    else
+      V20.Font.Color := clRed;
+  end
+  else if (posAmarela > 0) and (posVermelho > 0) and (posVermelho = posAmarela + 1) then
+    V20.Font.Color := clRed
+  else if (posGil > 0) and (posVermelho > 0) and (posVermelho = posGil + 1) then
+    V20.Font.Color := clRed
+  else if (posAmarela > 0) and (posGil > 0) and (posGil > posAmarela) then
+    V20.Font.Color := clRed
+  else
+    V20.Font.Color := clBlack;
+end;
+
+// Dica 21 – Agnaldo está exatamente à direita do cliente que está comprando um livro do autor australiano.
+V21.Font.Color := clBlack;
+
+var posAgnaldo, posAustraliano: Integer;
+begin
+  posAgnaldo := 0;
+  posAustraliano := 0;
+
+  for i7 := 1 to 5 do
+  begin
+    if Clientes[i7].Nome = 'Agnaldo' then
+      posAgnaldo := i7;
+    if Clientes[i7].Autor = 'australiano' then
+      posAustraliano := i7;
+  end;
+
+  // Caso ideal: Agnaldo está exatamente à direita do australiano
+  if (posAgnaldo > 0) and (posAustraliano > 0) then
+  begin
+    if posAgnaldo = posAustraliano + 1 then
+      V21.Font.Color := clGreen
+    else if Abs(posAgnaldo - posAustraliano) = 1 then
+      V21.Font.Color := clRed
+    else
+      V21.Font.Color := clRed;
+  end
+  // Apenas Agnaldo foi preenchido
+  else if (posAgnaldo > 0) then
+  begin
+    if posAgnaldo > 1 then
+    begin
+      if Clientes[posAgnaldo - 1].Autor = 'australiano' then
+        V21.Font.Color := clGreen
+      else if Clientes[posAgnaldo - 1].Autor <> '' then
+        V21.Font.Color := clRed;
+    end;
+  end
+  // Apenas australiano foi preenchido
+  else if (posAustraliano > 0) then
+  begin
+    if posAustraliano < 5 then
+    begin
+      if Clientes[posAustraliano + 1].Nome = 'Agnaldo' then
+        V21.Font.Color := clGreen
+      else if Clientes[posAustraliano + 1].Nome <> '' then
+        V21.Font.Color := clRed;
+    end;
+  end;
+end;
+
+
+
+todasCorretas := True;
+  for i7 := 1 to 21 do
+  begin
+    if Labels[i7].Font.Color <> clGreen then
+    begin
+      todasCorretas := False;
+      Break;
+    end;
+  end;
+
+  if todasCorretas and
+  (CamisaCliente1.Text = 'verde') and (NomeCliente1.Text = 'Gil') and (AssuntoCliente1.Text = 'economia') and (AutorCliente1.Text = 'brasileiro') and (PaginasCliente1.Text = '250') and (PrecoCliente1.Text = 'R$ 20') and
+
+  (CamisaCliente2.Text = 'vermelha') and (NomeCliente2.Text = 'Simão') and (AssuntoCliente2.Text = 'poesia') and (AutorCliente2.Text = 'angolano') and (PaginasCliente2.Text = '150') and (PrecoCliente2.Text = 'R$ 30') and
+
+  (CamisaCliente3.Text = 'amarela') and (NomeCliente3.Text = 'Roberto') and (AssuntoCliente3.Text = 'fotografia') and (AutorCliente3.Text = 'português') and (PaginasCliente3.Text = '200') and (PrecoCliente3.Text = 'R$ 60') and
+
+  (CamisaCliente4.Text = 'azul') and (NomeCliente4.Text = 'Claudinei') and (AssuntoCliente4.Text = 'artes') and (AutorCliente4.Text = 'australiano') and (PaginasCliente4.Text = '100') and (PrecoCliente4.Text = 'R$ 40') and
+
+  (CamisaCliente5.Text = 'branca') and (NomeCliente5.Text = 'Agnaldo') and (AssuntoCliente5.Text = 'biografia') and (AutorCliente5.Text = 'japonês') and (PaginasCliente5.Text = '300') and (PrecoCliente5.Text = 'R$ 50')
+then
+  ShowMessage('Parabéns, você venceu!');
+end;
+
+procedure TForm1.QualquerComboChange(Sender: TObject);
+begin
+  AtualizarDicas;
+end;
+
+
+procedure TForm1.ResetarCampos;
+var
+  AllCombos: array[1..30] of TComboBox;
+  i: Integer;
+begin
+  AllCombos[1] := CamisaCliente1;  AllCombos[2] := NomeCliente1;  AllCombos[3] := AssuntoCliente1;
+  AllCombos[4] := AutorCliente1;   AllCombos[5] := PaginasCliente1; AllCombos[6] := PrecoCliente1;
+  AllCombos[7] := CamisaCliente2;  AllCombos[8] := NomeCliente2;  AllCombos[9] := AssuntoCliente2;
+  AllCombos[10] := AutorCliente2;  AllCombos[11] := PaginasCliente2; AllCombos[12] := PrecoCliente2;
+  AllCombos[13] := CamisaCliente3; AllCombos[14] := NomeCliente3; AllCombos[15] := AssuntoCliente3;
+  AllCombos[16] := AutorCliente3;  AllCombos[17] := PaginasCliente3; AllCombos[18] := PrecoCliente3;
+  AllCombos[19] := CamisaCliente4; AllCombos[20] := NomeCliente4; AllCombos[21] := AssuntoCliente4;
+  AllCombos[22] := AutorCliente4;  AllCombos[23] := PaginasCliente4; AllCombos[24] := PrecoCliente4;
+  AllCombos[25] := CamisaCliente5; AllCombos[26] := NomeCliente5; AllCombos[27] := AssuntoCliente5;
+  AllCombos[28] := AutorCliente5;  AllCombos[29] := PaginasCliente5; AllCombos[30] := PrecoCliente5;
+
+  for i := 1 to 30 do
+    AllCombos[i].ItemIndex := -1;
+    GroupBox1.Color := clBtnFace;
+    GroupBox2.Color := clBtnFace;
+    GroupBox3.Color := clBtnFace;
+    GroupBox4.Color := clBtnFace;
+    GroupBox5.Color := clBtnFace;
+
+  AtualizarDicas; // Recalcula tudo
+end;
+
+
+procedure TForm1.VerificarDica12(const Clientes: array of TCliente; var LabelDica: TLabel);
+var
+  posVermelho_d12, posMaisBarato_d12, posJapones_d12: Integer;
+  precoMinimo_d12: Integer;
+  i_d12: Integer;
+begin
+  LabelDica.Font.Color := clBlack;
+
+  posVermelho_d12 := 0;
+  posMaisBarato_d12 := 0;
+  posJapones_d12 := 0;
+  precoMinimo_d12 := MaxInt;
+
+  // Identificar o menor preço
+  for i_d12 := 0 to 4 do
+    if (Clientes[i_d12].Preco > 0) and (Clientes[i_d12].Preco < precoMinimo_d12) then
+      precoMinimo_d12 := Clientes[i_d12].Preco;
+
+  // Achar as posições
+  for i_d12 := 0 to 4 do
+  begin
+    if Clientes[i_d12].Camisa = 'vermelha' then
+      posVermelho_d12 := i_d12 + 1;
+
+    if Clientes[i_d12].Preco = precoMinimo_d12 then
+      posMaisBarato_d12 := i_d12 + 1;
+
+    if Clientes[i_d12].Autor = 'japonês' then
+      posJapones_d12 := i_d12 + 1;
+  end;
+
+  // Se japonês está antes do mais barato → erro direto
+  if (posJapones_d12 > 0) and (posMaisBarato_d12 > 0) and (posJapones_d12 < posMaisBarato_d12) then
+  begin
+    LabelDica.Font.Color := clRed;
+    Exit;
+  end;
+
+  // Se todos foram posicionados corretamente
+  if (posMaisBarato_d12 > 0) and (posVermelho_d12 > 0) and (posJapones_d12 > 0) then
+  begin
+    if (posMaisBarato_d12 < posVermelho_d12) and (posVermelho_d12 < posJapones_d12) then
+      LabelDica.Font.Color := clGreen
+    else
+      LabelDica.Font.Color := clRed;
+    Exit;
+  end;
+
+  // Verificações parciais
+  if (posVermelho_d12 > 0) then
+  begin
+    if (posMaisBarato_d12 > 0) and (posVermelho_d12 <= posMaisBarato_d12) then
+    begin
+      LabelDica.Font.Color := clRed;
+      Exit;
+    end;
+
+    if (posJapones_d12 > 0) and (posVermelho_d12 >= posJapones_d12) then
+    begin
+      LabelDica.Font.Color := clRed;
+      Exit;
+    end;
+  end;
+
+  LabelDica.Font.Color := clBlack;
+end;
+
+
+
+procedure TForm1.VerificarDica18(const Clientes: array of TCliente;
+  var LabelDica: TLabel);
+var
+  i_d18: Integer;
+  pos30_d18, pos250_d18: Integer;
+  vizinhoEsquerdo_d18, vizinhoDireito_d18: Integer;
+  valido_d18: Boolean;
+begin
+  LabelDica.Font.Color := clBlack;
+  pos30_d18 := 0;
+  pos250_d18 := 0;
+
+  // Localiza posições
+  for i_d18 := 0 to 4 do
+  begin
+    if Clientes[i_d18].Preco = 30 then
+      pos30_d18 := i_d18 + 1;
+    if Clientes[i_d18].Paginas = 250 then
+      pos250_d18 := i_d18 + 1;
+  end;
+
+  // Ambos preenchidos
+  if (pos30_d18 > 0) and (pos250_d18 > 0) then
+  begin
+    if Abs(pos30_d18 - pos250_d18) = 1 then
+      LabelDica.Font.Color := clGreen
+    else
+      LabelDica.Font.Color := clRed;
+    Exit;
+  end;
+
+  // Só 250 preenchido
+  if (pos250_d18 > 0) then
+  begin
+    vizinhoEsquerdo_d18 := pos250_d18 - 1;
+    vizinhoDireito_d18 := pos250_d18 + 1;
+
+    if ((vizinhoEsquerdo_d18 >= 1) and (Clientes[vizinhoEsquerdo_d18 - 1].Preco <> 0) and (Clientes[vizinhoEsquerdo_d18 - 1].Preco <> 30)) and
+       ((vizinhoDireito_d18 <= 5) and (Clientes[vizinhoDireito_d18 - 1].Preco <> 0) and (Clientes[vizinhoDireito_d18 - 1].Preco <> 30)) then
+      LabelDica.Font.Color := clRed;
+    Exit;
+  end;
+
+  // Só R$30 preenchido
+  if (pos30_d18 > 0) then
+  begin
+    vizinhoEsquerdo_d18 := pos30_d18 - 1;
+    vizinhoDireito_d18 := pos30_d18 + 1;
+
+    if ((vizinhoEsquerdo_d18 >= 1) and (Clientes[vizinhoEsquerdo_d18 - 1].Paginas <> 0) and (Clientes[vizinhoEsquerdo_d18 - 1].Paginas <> 250)) and
+       ((vizinhoDireito_d18 <= 5) and (Clientes[vizinhoDireito_d18 - 1].Paginas <> 0) and (Clientes[vizinhoDireito_d18 - 1].Paginas <> 250)) then
+      LabelDica.Font.Color := clRed;
+    Exit;
+  end;
+
+  // Neutra
+  LabelDica.Font.Color := clBlack;
+end;
+
+end.
+
