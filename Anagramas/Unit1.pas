@@ -52,7 +52,7 @@ implementation
 
 function TForm1.RemoverAcentos(const Texto: string): string;
 const
-  ComAcento  = 'ÁÀÂÃÉÈÊÍÌÎÓÒÔÕÚÙÛÇáàâãéèêíìîóòôõúùûç';
+  ComAcento  = 'ÃÃ€Ã‚ÃƒÃ‰ÃˆÃŠÃÃŒÃÃ“Ã’Ã”Ã•ÃšÃ™Ã›Ã‡Ã¡Ã Ã¢Ã£Ã©Ã¨ÃªÃ­Ã¬Ã®Ã³Ã²Ã´ÃµÃºÃ¹Ã»Ã§';
   SemAcento  = 'AAAAEEEIIIOOOOUUUCaaaaeeeiiioooouuuc';
 var
   i, j: Integer;
@@ -76,7 +76,7 @@ var
   ListaPaises: TArray<string>;
   i: Integer;
 begin
-  ListaPaises := TFile.ReadAllLines('C:\Users\Henrique\GitH\delphi\Racha_Cuca_Trivia\Palavras.txt');
+  ListaPaises := TFile.ReadAllLines('C:\Users\Henrique\GitH\delphi\Anagramas\Palavras.txt');
   Fpaises := TList<string>.Create(ListaPaises);
   FLabelsPaises := TDictionary<string, TLabel>.Create;
   FAcertos := 0;
@@ -84,7 +84,7 @@ begin
   CriarOjetosPises;
   CriarBotoesLetras;
 
-  // Atribui o evento LetraClick aos botões fixos
+  // Atribui o evento LetraClick aos botÃµes fixos
   for i := 1 to 6 do
     if FindComponent('Letra' + i.ToString) is TButton then
       TButton(FindComponent('Letra' + i.ToString)).OnClick := LetraClick;
@@ -196,7 +196,7 @@ begin
   LetraRemovida := B.Caption;
   B.Caption := '';
 
-  // Reorganiza os botões para andar para trás
+  // Reorganiza os botÃµes para andar para trÃ¡s
   for i := 1 to 5 do
   begin
     if (TButton(FindComponent('Letra' + i.ToString)).Caption = '') then
@@ -211,12 +211,12 @@ begin
     end;
   end;
 
-  // Remove última ocorrência da letra da FResposta
+  // Remove Ãºltima ocorrÃªncia da letra da FResposta
   i := LastDelimiter(LetraRemovida, FResposta);
   if i > 0 then
     Delete(FResposta, i, 1);
 
-  // Reativa o botão no painel inferior
+  // Reativa o botÃ£o no painel inferior
   for i := 0 to Panel2.ControlCount - 1 do
   begin
     if (Panel2.Controls[i] is TButton) and
@@ -355,12 +355,12 @@ end;
 
 procedure TForm1.Venceu;
 begin
-  ShowMessage('Parabéns! Você acertou todas as palavras!');
+  ShowMessage('ParabÃ©ns! VocÃª acertou todas as palavras!');
 end;
 
 procedure TForm1.AtualizarRespostaVisual;
 begin
-  // Os botões já estão atualizados diretamente
+  // Os botÃµes jÃ¡ estÃ£o atualizados diretamente
 end;
 
 end.
