@@ -1,0 +1,260 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Generics.Collections, IOUtils,
+  System.Generics.Defaults;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    Pesquisa: TEdit;
+    Contador: TLabel;
+    PinelGoblal: TPanel;
+    Panel2: TPanel;
+    procedure FormCreate(Sender: TObject);
+    procedure Panel2Click(Sender: TObject);
+  private
+    Fpaises: TList<string>;
+    FLabelsPaises: TDictionary<string, TLabel>;
+    FAcertos: Integer;
+    procedure CriarOjetosPises;
+    function CriptografarPalavra(APalavra: string): string;
+    procedure Pesquisar;
+    procedure CriarBotoesLetras;
+    procedure BotaoLetraClick(Sender: TObject);
+    procedure BtnRevelarClick(Sender: TObject);
+    procedure BtnLimparClick(Sender: TObject);
+    procedure BtnReembaralharClick(Sender: TObject);
+    procedure Venceu;
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+var
+  ListaPaises: TArray<string>;
+begin
+  ListaPaises := TFile.ReadAllLines('C:\Users\Henrique\GitH\delphi\Racha_Cuca_Trivia\Palavras.txt');
+
+  Fpaises := TList<string>.Create(ListaPaises);
+  FLabelsPaises := TDictionary<string, TLabel>.Create;
+  FAcertos := 0;
+
+  CriarOjetosPises;
+  CriarBotoesLetras;
+end;
+
+procedure TForm1.CriarBotoesLetras;
+var
+  Letras: array of Char;
+  Botao, BtnRevelar, BtnReembaralhar, BtnLimpar: TButton;
+  i: Integer;
+begin
+  SetLength(Letras, 6);
+  Letras[0] := 'R';
+  Letras[1] := 'A';
+  Letras[2] := 'S';
+  Letras[3] := 'T';
+  Letras[4] := 'E';
+  Letras[5] := 'O';
+
+  TArray.Sort<Char>(Letras, TComparer<Char>.Construct(
+    function(const L, R: Char): Integer
+    begin
+      Result := Random(3) - 1;
+    end
+  ));
+
+  for i := Panel2.ControlCount - 1 downto 0 do
+    Panel2.Controls[i].Free;
+
+  for i := 0 to High(Letras) do
+  begin
+    Botao := TButton.Create(Self);
+    Botao.Parent := Panel2;
+    Botao.Caption := Letras[i];
+    Botao.Width := 60;
+    Botao.Height := 60;
+    Botao.Left := i * 65;
+    Botao.Top := 10;
+    Botao.Font.Size := 18;
+    Botao.Tag := i;
+    Botao.OnClick := BotaoLetraClick;
+  end;
+
+  BtnRevelar := TButton.Create(Self);
+  BtnRevelar.Parent := Panel2;
+  BtnRevelar.Caption := 'Revelar Palavra';
+  BtnRevelar.Width := 180;
+  BtnRevelar.Height := 40;
+  BtnRevelar.Left := 0;
+  BtnRevelar.Top := 80;
+  BtnRevelar.Font.Size := 10;
+  BtnRevelar.OnClick := BtnRevelarClick;
+
+  BtnReembaralhar := TButton.Create(Self);
+  BtnReembaralhar.Parent := Panel2;
+  BtnReembaralhar.Caption := 'Reembaralhar Letras';
+  BtnReembaralhar.Width := 180;
+  BtnReembaralhar.Height := 40;
+  BtnReembaralhar.Left := 200;
+  BtnReembaralhar.Top := 80;
+  BtnReembaralhar.Font.Size := 10;
+  BtnReembaralhar.OnClick := BtnReembaralharClick;
+
+  BtnLimpar := TButton.Create(Self);
+  BtnLimpar.Parent := Panel2;
+  BtnLimpar.Caption := 'Limpar Letras';
+  BtnLimpar.Width := 180;
+  BtnLimpar.Height := 40;
+  BtnLimpar.Left := 400;
+  BtnLimpar.Top := 80;
+  BtnLimpar.Font.Size := 10;
+  BtnLimpar.Tag := -1;
+  BtnLimpar.OnClick := BtnLimparClick;
+end;
+
+procedure TForm1.BotaoLetraClick(Sender: TObject);
+var
+  B: TButton;
+begin
+  B := Sender as TButton;
+  B.Enabled := False;
+  Pesquisa.Text := Pesquisa.Text + B.Caption;
+  Pesquisar;
+end;
+
+procedure TForm1.BtnLimparClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  Pesquisa.Clear;
+
+  for i := 0 to Panel2.ControlCount - 1 do
+    if (Panel2.Controls[i] is TButton) and
+       (TButton(Panel2.Controls[i]).Tag >= 0) then
+      TButton(Panel2.Controls[i]).Enabled := True;
+end;
+
+procedure TForm1.BtnReembaralharClick(Sender: TObject);
+begin
+  Pesquisa.Clear;
+  CriarBotoesLetras;
+end;
+
+procedure TForm1.BtnRevelarClick(Sender: TObject);
+var
+  Palavra: string;
+begin
+  for Palavra in Fpaises do
+  begin
+    if FLabelsPaises.ContainsKey(Palavra) and
+       (Pos('?', FLabelsPaises[Palavra].Caption) > 0) then
+    begin
+      FLabelsPaises[Palavra].Caption := Palavra;
+      Inc(FAcertos);
+      Contador.Caption := 'Acertos: ' + FAcertos.ToString;
+      if FAcertos = 50 then
+        Venceu;
+      Break;
+    end;
+  end;
+end;
+
+procedure TForm1.Venceu;
+begin
+  ShowMessage('Parabéns! Você encontrou todas as palavras!');
+end;
+
+procedure TForm1.CriarOjetosPises;
+const
+  PalavrasPorPanel = 10;
+var
+  Panel: TPanel;
+  Pias: TLabel;
+  PaisOriginal: string;
+  IndexPainel: Integer;
+begin
+  IndexPainel := 0;
+
+  for var I := 0 to Fpaises.Count - 1 do
+  begin
+    PaisOriginal := Fpaises.Items[I];
+
+    if FLabelsPaises.ContainsKey(PaisOriginal) then
+      Continue;
+
+    if (IndexPainel mod PalavrasPorPanel = 0) then
+    begin
+      Panel := TPanel.Create(Self);
+      Panel.Parent := PinelGoblal;
+      Panel.Align := alLeft;
+      Panel.Width := 300;
+    end;
+
+    Pias := TLabel.Create(Self);
+    Pias.Parent := Panel;
+    Pias.Align := alTop;
+    Pias.Alignment := taLeftJustify;
+    Pias.Font.Size := 16;
+    Pias.Caption := CriptografarPalavra(PaisOriginal);
+
+    FLabelsPaises.Add(PaisOriginal, Pias);
+    Inc(IndexPainel);
+  end;
+end;
+
+function TForm1.CriptografarPalavra(APalavra: string): string;
+begin
+  Result := '';
+  for var Ch in APalavra do
+  begin
+    if Ch = ' ' then
+      Result := Result + ' '
+    else
+      Result := Result + '?';
+  end;
+end;
+
+procedure TForm1.Panel2Click(Sender: TObject);
+begin
+  // vazio
+end;
+
+procedure TForm1.Pesquisar;
+var
+  PalavraDigitada: string;
+begin
+  PalavraDigitada := Trim(Pesquisa.Text).ToLower;
+
+  for var Pais in Fpaises do
+  begin
+    if PalavraDigitada = Pais.ToLower then
+    begin
+      if FLabelsPaises.ContainsKey(Pais) and
+         (Pos('?', FLabelsPaises[Pais].Caption) > 0) then
+      begin
+        FLabelsPaises[Pais].Caption := Pais;
+        Inc(FAcertos);
+        Contador.Caption := 'Acertos: ' + FAcertos.ToString;
+        if FAcertos = 50 then
+          Venceu;
+      end;
+      Break;
+    end;
+  end;
+end;
+
+end.
+
